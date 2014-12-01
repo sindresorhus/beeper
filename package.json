@@ -1,0 +1,37 @@
+{
+  "name": "beeper",
+  "version": "0.0.0",
+  "description": "Make your terminal beep",
+  "license": "MIT",
+  "repository": "sindresorhus/beeper",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "beep",
+    "beeper",
+    "boop",
+    "terminal",
+    "term",
+    "cli",
+    "console",
+    "ding",
+    "ping",
+    "alert",
+    "gulpfriendly"
+  ],
+  "devDependencies": {
+    "ava": "0.0.4"
+  }
+}
