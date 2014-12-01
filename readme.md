@@ -4,6 +4,7 @@
 
 Useful as an attention grabber e.g. when an error happens.
 
+![beeper](media/beep-boop-beep.gif)
 
 ## Install
 
