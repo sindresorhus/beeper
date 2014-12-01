@@ -2,6 +2,8 @@
 
 > Make your terminal beep
 
+![Beep image](https://38.media.tumblr.com/ad0219f26d7afd147aeaa216e75bbc97/tumblr_mfxatiSnGE1qbrdf3o1_500.gif)
+
 Useful as an attention grabber e.g. when an error happens.
 
 
