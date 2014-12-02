@@ -2,7 +2,7 @@
 
 > Make your terminal beep
 
-![Beep image](https://38.media.tumblr.com/ad0219f26d7afd147aeaa216e75bbc97/tumblr_mfxatiSnGE1qbrdf3o1_500.gif)
+![](https://cloud.githubusercontent.com/assets/170270/5261236/f8471100-7a49-11e4-81af-96cd09a522d9.gif)
 
 Useful as an attention grabber e.g. when an error happens.
 
