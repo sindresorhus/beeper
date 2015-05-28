@@ -32,9 +32,8 @@ module.exports = function (val) {
 		beep();
 	} else if (typeof val === 'number') {
 		beep();
-		val--;
 
-		while (val--) {
+		while (--val) {
 			setTimeout(beep, BEEP_DELAY * val);
 		}
 	} else if (typeof val === 'string') {
