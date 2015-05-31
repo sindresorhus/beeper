@@ -48,6 +48,18 @@ test('beep - count non-integer should throw exception', function (t) {
 	}
 });
 
+test('beep - count negative should throw exception', function (t) {
+	try {
+		beeper(-1, function () {
+			t.assert(false);
+			t.end();
+		});
+	} catch (e) {
+		t.assert(true);
+		t.end();
+	}
+});
+
 test('beep - melody', function (t) {
 	var i = 0;
 

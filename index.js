@@ -35,6 +35,10 @@ module.exports = function (val, cb) {
 		beep();
 		cb();
 	} else if (val === parseInt(val)) {
+		if (val < 0) {
+			throw new TypeError('Negative numbers are not accepted');
+		}
+
 		beep();
 
 		if (val === 1) {
