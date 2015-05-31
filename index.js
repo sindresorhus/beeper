@@ -34,7 +34,7 @@ module.exports = function (val, cb) {
 	if (!val) {
 		beep();
 		cb();
-	} else if (typeof val === 'number') {
+	} else if (val === parseInt(val)) {
 		beep();
 
 		if (val === 1) {
