@@ -7,7 +7,7 @@
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -32,6 +32,7 @@
     "gulpfriendly"
   ],
   "devDependencies": {
-    "ava": "0.0.4"
+    "hooker": "^0.2.3",
+    "tape": "^4.0.0"
   }
 }

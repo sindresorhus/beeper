@@ -13,8 +13,9 @@ function beep() {
 	process.stdout.write('\u0007');
 }
 
-function melodicalBeep(val) {
+function melodicalBeep(val, cb) {
 	if (val.length === 0) {
+		cb();
 		return;
 	}
 
@@ -23,21 +24,37 @@ function melodicalBeep(val) {
 			beep();
 		}
 
-		melodicalBeep(val);
+		melodicalBeep(val, cb);
 	}, BEEP_DELAY);
 }
 
-module.exports = function (val) {
-	if (val == null) {
+module.exports = function (val, cb) {
+	cb = cb || function () {};
+
+	if (!val) {
 		beep();
+		cb();
 	} else if (typeof val === 'number') {
 		beep();
 
+		if (val === 1) {
+			cb();
+			return;
+		}
+
+		var lastBeepIndex = val - 1;
+
 		while (--val) {
-			setTimeout(beep, BEEP_DELAY * val);
+			setTimeout(function (i) {
+				beep();
+
+				if (i === lastBeepIndex) {
+					cb();
+				}
+			}, BEEP_DELAY * val, val);
 		}
 	} else if (typeof val === 'string') {
-		melodicalBeep(val.split(''));
+		melodicalBeep(val.split(''), cb);
 	} else {
 		throw new TypeError('Not an accepted type');
 	}

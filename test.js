@@ -1,56 +1,53 @@
 'use strict';
-var test = require('ava');
+var test = require('tape');
+var hooker = require('hooker');
 var beeper = require('./');
 var BEEP_CHAR = '\u0007';
 
 test('beep', function (t) {
-	var _ = process.stdout.write;
+	var i = 0;
 
-	process.stdout.write = function (str) {
+	hooker.hook(process.stdout, 'write', function (str) {
 		if (str === BEEP_CHAR) {
-			t.assert(true);
+			i++;
 		}
-	};
+	});
 
-	beeper();
-	process.stdout.write = _;
-	t.end();
+	beeper(1, function () {
+		hooker.unhook(process.stdout, 'write');
+		t.assert(i === 1, i);
+		t.end();
+	});
 });
 
 test('beep - count', function (t) {
-	var _ = process.stdout.write;
 	var i = 0;
 
-	process.stdout.write = function (str) {
+	hooker.hook(process.stdout, 'write', function (str) {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
+	});
 
-		if (i === 3) {
-			process.stdout.write = _;
-			t.assert(true);
-			t.end();
-		}
-	};
-
-	beeper(3);
+	beeper(3, function () {
+		hooker.unhook(process.stdout, 'write');
+		t.assert(i === 3, i);
+		t.end();
+	});
 });
 
 test('beep - melody', function (t) {
-	var _ = process.stdout.write;
 	var i = 0;
 
-	process.stdout.write = function (str) {
+	hooker.hook(process.stdout, 'write', function (str) {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
+	});
 
-		if (i === 2) {
-			process.stdout.write = _;
-			t.assert(true);
-			t.end();
-		}
-	};
-
-	beeper('*-*');
+	beeper('*-*', function () {
+		hooker.unhook(process.stdout, 'write');
+		t.assert(i === 2, i);
+		t.end();
+	});
 });
