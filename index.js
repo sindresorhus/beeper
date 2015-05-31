@@ -31,32 +31,29 @@ function melodicalBeep(val, cb) {
 module.exports = function (val, cb) {
 	cb = cb || function () {};
 
-	if (!val) {
-		beep();
-		cb();
-	} else if (val === parseInt(val)) {
+	if (val === parseInt(val)) {
+		var i;
+
 		if (val < 0) {
 			throw new TypeError('Negative numbers are not accepted');
 		}
 
-		beep();
-
-		if (val === 1) {
-			cb();
-			return;
+		if (val === 0) {
+			return cb();
 		}
 
-		var lastBeepIndex = val - 1;
-
-		while (--val) {
+		for (i = 0; i < val; i++) {
 			setTimeout(function (i) {
 				beep();
 
-				if (i === lastBeepIndex) {
+				if (i === val - 1) {
 					cb();
 				}
-			}, BEEP_DELAY * val, val);
+			}, BEEP_DELAY * i, i);
 		}
+	} else if (!val) {
+		beep();
+		cb();
 	} else if (typeof val === 'string') {
 		melodicalBeep(val.split(''), cb);
 	} else {

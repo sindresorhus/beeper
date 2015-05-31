@@ -20,21 +20,27 @@ test('beep', function (t) {
 	});
 });
 
-test('beep - count', function (t) {
-	var i = 0;
+function testBeepCount(count) {
+	test('beep - count ' + count, function (t) {
+		var i = 0;
 
-	hooker.hook(process.stdout, 'write', function (str) {
-		if (str === BEEP_CHAR) {
-			i++;
-		}
-	});
+		hooker.hook(process.stdout, 'write', function (str) {
+			if (str === BEEP_CHAR) {
+				i++;
+			}
+		});
 
-	beeper(3, function () {
-		hooker.unhook(process.stdout, 'write');
-		t.assert(i === 3, i);
-		t.end();
+		beeper(count, function () {
+			hooker.unhook(process.stdout, 'write');
+			t.assert(i === count, i);
+			t.end();
+		});
 	});
-});
+}
+
+testBeepCount(0);
+testBeepCount(1);
+testBeepCount(3);
 
 test('beep - count non-integer should throw exception', function (t) {
 	try {
