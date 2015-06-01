@@ -9,7 +9,7 @@ Useful as an attention grabber e.g. when an error happens.
 
 ## Install
 
-```sh
+```
 $ npm install --save beeper
 ```
 
@@ -34,7 +34,7 @@ beeper('****-*-*');
 
 It will not beep if stdout is not TTY or if the user supplies the `--no-beep` flag.
 
-### beeper([count|melody])
+### beeper([count|melody], [callback])
 
 #### count
 

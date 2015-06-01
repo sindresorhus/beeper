@@ -1,56 +1,83 @@
 'use strict';
-var test = require('ava');
+var test = require('tape');
+var hooker = require('hooker');
 var beeper = require('./');
 var BEEP_CHAR = '\u0007';
 
 test('beep', function (t) {
-	var _ = process.stdout.write;
-
-	process.stdout.write = function (str) {
-		if (str === BEEP_CHAR) {
-			t.assert(true);
-		}
-	};
-
-	beeper();
-	process.stdout.write = _;
-	t.end();
-});
-
-test('beep - count', function (t) {
-	var _ = process.stdout.write;
 	var i = 0;
 
-	process.stdout.write = function (str) {
+	hooker.hook(process.stdout, 'write', function (str) {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
+	});
 
-		if (i === 3) {
-			process.stdout.write = _;
-			t.assert(true);
+	beeper(1, function () {
+		hooker.unhook(process.stdout, 'write');
+		t.assert(i === 1, i);
+		t.end();
+	});
+});
+
+function testBeepCount(count) {
+	test('beep - count ' + count, function (t) {
+		var i = 0;
+
+		hooker.hook(process.stdout, 'write', function (str) {
+			if (str === BEEP_CHAR) {
+				i++;
+			}
+		});
+
+		beeper(count, function () {
+			hooker.unhook(process.stdout, 'write');
+			t.assert(i === count, i);
 			t.end();
-		}
-	};
+		});
+	});
+}
 
-	beeper(3);
+testBeepCount(0);
+testBeepCount(1);
+testBeepCount(3);
+
+test('beep - count non-integer should throw exception', function (t) {
+	try {
+		beeper(1.5, function () {
+			t.assert(false);
+			t.end();
+		});
+	} catch (e) {
+		t.assert(true);
+		t.end();
+	}
+});
+
+test('beep - count negative should throw exception', function (t) {
+	try {
+		beeper(-1, function () {
+			t.assert(false);
+			t.end();
+		});
+	} catch (e) {
+		t.assert(true);
+		t.end();
+	}
 });
 
 test('beep - melody', function (t) {
-	var _ = process.stdout.write;
 	var i = 0;
 
-	process.stdout.write = function (str) {
+	hooker.hook(process.stdout, 'write', function (str) {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
+	});
 
-		if (i === 2) {
-			process.stdout.write = _;
-			t.assert(true);
-			t.end();
-		}
-	};
-
-	beeper('*-*');
+	beeper('*-*', function () {
+		hooker.unhook(process.stdout, 'write');
+		t.assert(i === 2, i);
+		t.end();
+	});
 });
