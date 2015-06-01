@@ -32,17 +32,16 @@ module.exports = function (val, cb) {
 	cb = cb || function () {};
 
 	if (val === parseInt(val)) {
-		var i;
-
 		if (val < 0) {
 			throw new TypeError('Negative numbers are not accepted');
 		}
 
 		if (val === 0) {
-			return cb();
+			cb();
+			return;
 		}
 
-		for (i = 0; i < val; i++) {
+		for (var i = 0; i < val; i++) {
 			setTimeout(function (i) {
 				beep();
 

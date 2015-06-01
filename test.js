@@ -21,7 +21,7 @@ test('beep', function (t) {
 });
 
 function testBeepCount(count) {
-	test('beep - count ' + count, function (t) {
+	test('count ' + count, function (t) {
 		var i = 0;
 
 		hooker.hook(process.stdout, 'write', function (str) {
@@ -42,7 +42,7 @@ testBeepCount(0);
 testBeepCount(1);
 testBeepCount(3);
 
-test('beep - count non-integer should throw exception', function (t) {
+test('non-integer count should throw exception', function (t) {
 	try {
 		beeper(1.5, function () {
 			t.assert(false);
@@ -54,7 +54,7 @@ test('beep - count non-integer should throw exception', function (t) {
 	}
 });
 
-test('beep - count negative should throw exception', function (t) {
+test('negative count should throw exception', function (t) {
 	try {
 		beeper(-1, function () {
 			t.assert(false);
@@ -66,7 +66,7 @@ test('beep - count negative should throw exception', function (t) {
 	}
 });
 
-test('beep - melody', function (t) {
+test('melody', function (t) {
 	var i = 0;
 
 	hooker.hook(process.stdout, 'write', function (str) {
