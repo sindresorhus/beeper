@@ -2,12 +2,14 @@
 
 var BEEP_DELAY = 500;
 
-if (!process.stdout.isTTY ||
-	process.argv.indexOf('--no-beep') !== -1 ||
-	process.argv.indexOf('--beep=false') !== -1) {
-	module.exports = function () {};
-	return;
-}
+(function() {
+	if (!process.stdout.isTTY ||
+		process.argv.indexOf('--no-beep') !== -1 ||
+		process.argv.indexOf('--beep=false') !== -1) {
+		module.exports = function () {};
+		return;
+	}
+})();
 
 function beep() {
 	process.stdout.write('\u0007');
