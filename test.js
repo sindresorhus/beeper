@@ -1,40 +1,39 @@
-'use strict';
-var test = require('tape');
-var hooker = require('hooker');
-var beeper = require('./');
-var BEEP_CHAR = '\u0007';
+import {promisify} from 'util';
+import {serial as test} from 'ava';
+import hooker from 'hooker';
+import beeper from '.';
 
-test('beep', function (t) {
-	var i = 0;
+const BEEP_CHAR = '\u0007';
 
-	hooker.hook(process.stdout, 'write', function (str) {
+test('beep', async t => {
+	let i = 0;
+
+	hooker.hook(process.stdout, 'write', str => {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
 	});
 
-	beeper(1, function () {
-		hooker.unhook(process.stdout, 'write');
-		t.assert(i === 1, i);
-		t.end();
-	});
+	await promisify(beeper)(1);
+
+	hooker.unhook(process.stdout, 'write');
+	t.true(i === 1);
 });
 
 function testBeepCount(count) {
-	test('count ' + count, function (t) {
-		var i = 0;
+	test('count ' + count, async t => {
+		let i = 0;
 
-		hooker.hook(process.stdout, 'write', function (str) {
+		hooker.hook(process.stdout, 'write', str => {
 			if (str === BEEP_CHAR) {
 				i++;
 			}
 		});
 
-		beeper(count, function () {
-			hooker.unhook(process.stdout, 'write');
-			t.assert(i === count, i);
-			t.end();
-		});
+		await promisify(beeper)(count);
+
+		hooker.unhook(process.stdout, 'write');
+		t.true(i === count);
 	});
 }
 
@@ -42,42 +41,35 @@ testBeepCount(0);
 testBeepCount(1);
 testBeepCount(3);
 
-test('non-integer count should throw exception', function (t) {
+test('non-integer count should throw exception', async t => {
 	try {
-		beeper(1.5, function () {
-			t.assert(false);
-			t.end();
-		});
-	} catch (e) {
-		t.assert(true);
-		t.end();
+		await promisify(beeper)(1.5);
+		t.fail();
+	} catch (error) {
+		t.pass();
 	}
 });
 
-test('negative count should throw exception', function (t) {
+test('negative count should throw exception', async t => {
 	try {
-		beeper(-1, function () {
-			t.assert(false);
-			t.end();
-		});
-	} catch (e) {
-		t.assert(true);
-		t.end();
+		await promisify(beeper)(-1);
+		t.fail();
+	} catch (error) {
+		t.pass();
 	}
 });
 
-test('melody', function (t) {
-	var i = 0;
+test('melody', async t => {
+	let i = 0;
 
-	hooker.hook(process.stdout, 'write', function (str) {
+	hooker.hook(process.stdout, 'write', str => {
 		if (str === BEEP_CHAR) {
 			i++;
 		}
 	});
 
-	beeper('*-*', function () {
-		hooker.unhook(process.stdout, 'write');
-		t.assert(i === 2, i);
-		t.end();
-	});
+	await promisify(beeper)('*-*');
+
+	hooker.unhook(process.stdout, 'write');
+	t.true(i === 2);
 });
