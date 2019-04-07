@@ -32,6 +32,9 @@
 		"alert",
 		"gulpfriendly"
 	],
+	"dependencies": {
+		"delay": "^4.1.0"
+	},
 	"devDependencies": {
 		"ava": "^1.4.1",
 		"hooker": "^0.2.3",

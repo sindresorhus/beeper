@@ -19,14 +19,16 @@ $ npm install beeper
 ```js
 const beeper = require('beeper');
 
-beeper();
-// beep one time
+(async => {
+	await beeper();
+	// beep one time
 
-beeper(3);
-// beep three times
+	await beeper(3);
+	// beep three times
 
-beeper('****-*-*');
-// beep, beep, beep, beep, pause, beep, pause, beep
+	await beeper('****-*-*');
+	// beep, beep, beep, beep, pause, beep, pause, beep
+})();
 ```
 
 
@@ -34,7 +36,9 @@ beeper('****-*-*');
 
 It will not beep if stdout is not TTY or if the user supplies the `--no-beep` flag.
 
-### beeper([count|melody], [callback])
+### beeper([count|melody])
+
+Returns a `Promise<void>` that is resolved after the melody has ended.
 
 #### count
 
