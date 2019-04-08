@@ -10,23 +10,25 @@ Useful as an attention grabber e.g. when an error happens.
 ## Install
 
 ```
-$ npm install --save beeper
+$ npm install beeper
 ```
 
 
 ## Usage
 
 ```js
-var beeper = require('beeper');
+const beeper = require('beeper');
 
-beeper();
-// beep one time
+(async => {
+	await beeper();
+	// beep one time
 
-beeper(3);
-// beep three times
+	await beeper(3);
+	// beep three times
 
-beeper('****-*-*');
-// beep, beep, beep, beep, pause, beep, pause, beep
+	await beeper('****-*-*');
+	// beep, beep, beep, beep, pause, beep, pause, beep
+})();
 ```
 
 
@@ -34,11 +36,13 @@ beeper('****-*-*');
 
 It will not beep if stdout is not TTY or if the user supplies the `--no-beep` flag.
 
-### beeper([count|melody], [callback])
+### beeper([count|melody])
+
+Returns a `Promise<void>` that is resolved after the melody has ended.
 
 #### count
 
-Type: `number`  
+Type: `number`
 Default: `1`
 
 How many times you want it to beep.
@@ -52,4 +56,4 @@ Construct your own melody by supplying a string of `*` for beep `-` for pause.
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)

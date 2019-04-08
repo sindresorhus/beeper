@@ -1,59 +1,53 @@
 'use strict';
+const delay = require('delay');
 
-var BEEP_DELAY = 500;
+const BEEP_DELAY = 500;
 
 function beep() {
 	process.stdout.write('\u0007');
 }
 
-function melodicalBeep(val, cb) {
-	if (val.length === 0) {
-		cb();
+async function melodicalBeep(melody) {
+	if (melody.length === 0) {
 		return;
 	}
 
-	setTimeout(function () {
-		if (val.shift() === '*') {
-			beep();
-		}
+	await delay(BEEP_DELAY);
 
-		melodicalBeep(val, cb);
-	}, BEEP_DELAY);
+	if (melody.shift() === '*') {
+		beep();
+	}
+
+	return melodicalBeep(melody);
 }
 
-module.exports = function (val, cb) {
-	if (!process.stdout.isTTY ||
+module.exports = async countOrMelody => {
+	if (
+		!process.stdout.isTTY ||
 		process.argv.indexOf('--no-beep') !== -1 ||
-		process.argv.indexOf('--beep=false') !== -1) {
+		process.argv.indexOf('--beep=false') !== -1
+	) {
 		return;
 	}
 
-	cb = cb || function () {};
-
-	if (val === parseInt(val)) {
-		if (val < 0) {
+	if (countOrMelody === Number.parseInt(countOrMelody, 10)) {
+		if (countOrMelody < 0) {
 			throw new TypeError('Negative numbers are not accepted');
 		}
 
-		if (val === 0) {
-			cb();
+		if (countOrMelody === 0) {
 			return;
 		}
 
-		for (var i = 0; i < val; i++) {
-			setTimeout(function (i) {
-				beep();
+		for (let i = 0; i < countOrMelody; i++) {
+			await delay(BEEP_DELAY); // eslint-disable-line no-await-in-loop
 
-				if (i === val - 1) {
-					cb();
-				}
-			}, BEEP_DELAY * i, i);
+			beep();
 		}
-	} else if (!val) {
+	} else if (!countOrMelody) {
 		beep();
-		cb();
-	} else if (typeof val === 'string') {
-		melodicalBeep(val.split(''), cb);
+	} else if (typeof countOrMelody === 'string') {
+		await melodicalBeep(countOrMelody.split(''));
 	} else {
 		throw new TypeError('Not an accepted type');
 	}
