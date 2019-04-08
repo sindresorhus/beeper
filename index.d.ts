@@ -3,7 +3,7 @@ Make your terminal beep.
 
 @param count - How many times you want it to beep. Default: `1`.
 @param melody - Construct your own melody by supplying a string of `*` for beep `-` for pause.
-@returns Is resolved after the melody has ended.
+@returns A `Promise` that is resolved after the melody has ended.
 
 @example
 ```

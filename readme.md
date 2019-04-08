@@ -4,7 +4,7 @@
 
 ![](https://cloud.githubusercontent.com/assets/170270/5261236/f8471100-7a49-11e4-81af-96cd09a522d9.gif)
 
-Useful as an attention grabber e.g. when an error happens.
+Useful as an attention grabber. For example, when an error happens.
 
 
 ## Install

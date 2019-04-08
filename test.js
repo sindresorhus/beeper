@@ -2,13 +2,13 @@ import {serial as test} from 'ava';
 import hooker from 'hooker';
 import beeper from '.';
 
-const BEEP_CHAR = '\u0007';
+const BEEP_CHARACTER = '\u0007';
 
 test('beep', async t => {
 	let i = 0;
 
 	hooker.hook(process.stdout, 'write', string => {
-		if (string === BEEP_CHAR) {
+		if (string === BEEP_CHARACTER) {
 			i++;
 		}
 	});
@@ -24,7 +24,7 @@ function testBeepCount(count) {
 		let i = 0;
 
 		hooker.hook(process.stdout, 'write', string => {
-			if (string === BEEP_CHAR) {
+			if (string === BEEP_CHARACTER) {
 				i++;
 			}
 		});
@@ -62,7 +62,7 @@ test('melody', async t => {
 	let i = 0;
 
 	hooker.hook(process.stdout, 'write', string => {
-		if (string === BEEP_CHAR) {
+		if (string === BEEP_CHARACTER) {
 			i++;
 		}
 	});

@@ -24,8 +24,8 @@ async function melodicalBeep(melody) {
 module.exports = async countOrMelody => {
 	if (
 		!process.stdout.isTTY ||
-		process.argv.indexOf('--no-beep') !== -1 ||
-		process.argv.indexOf('--beep=false') !== -1
+		process.argv.includes('--no-beep') ||
+		process.argv.includes('--beep=false')
 	) {
 		return;
 	}
