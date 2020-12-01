@@ -1,4 +1,4 @@
-# beeper [![Build Status](https://travis-ci.org/sindresorhus/beeper.svg?branch=master)](https://travis-ci.org/sindresorhus/beeper)
+# beeper
 
 > Make your terminal beep
 
@@ -6,13 +6,11 @@
 
 Useful as an attention grabber. For example, when an error happens.
 
-
 ## Install
 
 ```
 $ npm install beeper
 ```
-
 
 ## Usage
 
@@ -31,18 +29,18 @@ const beeper = require('beeper');
 })();
 ```
 
-
 ## API
 
 It will not beep if stdout is not TTY or if the user supplies the `--no-beep` flag.
 
-### beeper([count|melody])
+### beeper(count?)
+### beeper(melody?)
 
 Returns a `Promise<void>` that is resolved after the melody has ended.
 
 #### count
 
-Type: `number`
+Type: `number`\
 Default: `1`
 
 How many times you want it to beep.
@@ -52,8 +50,3 @@ How many times you want it to beep.
 Type: `string`
 
 Construct your own melody by supplying a string of `*` for beep `-` for pause.
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)
