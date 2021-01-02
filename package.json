@@ -33,7 +33,7 @@
 		"gulpfriendly"
 	],
 	"dependencies": {
-		"delay": "^4.1.0"
+		"yoctodelay": "^1.1.0"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",

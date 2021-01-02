@@ -1,5 +1,5 @@
 'use strict';
-const delay = require('delay');
+const delay = require('yoctodelay');
 
 const BEEP_DELAY = 500;
 
