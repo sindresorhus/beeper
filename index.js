@@ -1,5 +1,4 @@
-'use strict';
-const delay = require('yoctodelay');
+import delay from 'yoctodelay';
 
 const BEEP_DELAY = 500;
 
@@ -21,7 +20,7 @@ async function melodicalBeep(melody) {
 	return melodicalBeep(melody);
 }
 
-module.exports = async countOrMelody => {
+export default async function beeper(countOrMelody) {
 	if (
 		!process.stdout.isTTY ||
 		process.argv.includes('--no-beep') ||
@@ -39,7 +38,7 @@ module.exports = async countOrMelody => {
 			return;
 		}
 
-		for (let i = 0; i < countOrMelody; i++) {
+		for (let index = 0; index < countOrMelody; index++) {
 			await delay(BEEP_DELAY); // eslint-disable-line no-await-in-loop
 
 			beep();
@@ -51,4 +50,4 @@ module.exports = async countOrMelody => {
 	} else {
 		throw new TypeError('Not an accepted type');
 	}
-};
+}

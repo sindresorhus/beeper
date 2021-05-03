@@ -7,21 +7,17 @@ Make your terminal beep.
 
 @example
 ```
-import beeper = require('beeper');
+import beeper from 'beeper';
 
-(async => {
-	await beeper();
-	// beep one time
+await beeper();
+// beep one time
 
-	await beeper(3);
-	// beep three times
+await beeper(3);
+// beep three times
 
-	await beeper('****-*-*');
-	// beep, beep, beep, beep, pause, beep, pause, beep
-})();
+await beeper('****-*-*');
+// beep, beep, beep, beep, pause, beep, pause, beep
 ```
 */
-declare function beeper(count?: number): Promise<void>;
-declare function beeper(melody: string): Promise<void>;
-
-export = beeper;
+export default function beeper(count?: number): Promise<void>;
+export default function beeper(melody: string): Promise<void>; // eslint-disable-line no-redeclare

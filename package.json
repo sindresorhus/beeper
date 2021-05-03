@@ -4,13 +4,16 @@
 	"description": "Make your terminal beep",
 	"license": "MIT",
 	"repository": "sindresorhus/beeper",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
 		"url": "https://sindresorhus.com"
 	},
+	"type": "module",
+	"exports": "./index.js",
 	"engines": {
-		"node": ">=8"
+		"node": ">=12"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -24,7 +27,6 @@
 		"beeper",
 		"boop",
 		"terminal",
-		"term",
 		"cli",
 		"console",
 		"ding",
@@ -33,12 +35,15 @@
 		"gulpfriendly"
 	],
 	"dependencies": {
-		"yoctodelay": "^1.1.0"
+		"yoctodelay": "^1.2.0"
 	},
 	"devDependencies": {
-		"ava": "^1.4.1",
+		"ava": "^3.15.0",
 		"hooker": "^0.2.3",
-		"tsd": "^0.7.2",
-		"xo": "^0.24.0"
+		"tsd": "^0.14.0",
+		"xo": "^0.39.1"
+	},
+	"ava": {
+		"serial": true
 	}
 }

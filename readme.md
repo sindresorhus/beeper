@@ -15,18 +15,16 @@ $ npm install beeper
 ## Usage
 
 ```js
-const beeper = require('beeper');
+import beeper from 'beeper';
 
-(async => {
-	await beeper();
-	// beep one time
+await beeper();
+// beep one time
 
-	await beeper(3);
-	// beep three times
+await beeper(3);
+// beep three times
 
-	await beeper('****-*-*');
-	// beep, beep, beep, beep, pause, beep, pause, beep
-})();
+await beeper('****-*-*');
+// beep, beep, beep, beep, pause, beep, pause, beep
 ```
 
 ## API
