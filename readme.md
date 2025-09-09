@@ -8,8 +8,8 @@ Useful as an attention grabber. For example, when an error happens.
 
 ## Install
 
-```
-$ npm install beeper
+```sh
+npm install beeper
 ```
 
 ## Usage
@@ -48,3 +48,7 @@ How many times you want it to beep.
 Type: `string`
 
 Construct your own melody by supplying a string of `*` for beep `-` for pause.
+
+## Notes
+
+On systems where the beep sound duration exceeds 500ms (like macOS with certain alert sounds), beeps in melodies may overlap. This is a limitation of the ASCII bell character which provides no duration control.
